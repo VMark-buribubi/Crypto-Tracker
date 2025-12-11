@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="navigation-bar">
+    <a mat-button routerLink="/"> <mat-icon>arrow_back</mat-icon> Back to List </a>
+
+    @if (!isLoading() && coin(); as data) {
+      <button mat-flat-button color="primary" (click)="favoritesService.toggleFavorite(data.id)">
+        <mat-icon [style.color]="favoritesService.isFavorite(data.id) ? 'gold' : 'white'">
+          {{ favoritesService.isFavorite(data.id) ? 'star' : 'star_border' }}
+        </mat-icon>
+        {{ favoritesService.isFavorite(data.id) ? 'Saved' : 'Save' }}
+      </button>
+    }
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+  @if (!isLoading() && coin(); as data) {
+    <div class="header-section">
+      <img [src]="data.image.large" [alt]="data.name" class="coin-logo" />
+      <h1>
+        {{ data.name }} <span class="symbol">({{ data.symbol | uppercase }})</span>
+      </h1>
+
+      <div class="price-tag">
+        {{ data.market_data.current_price.usd | currency: 'USD' }}
+      </div>
+
+      <mat-chip-set aria-label="Coin ranking">
+        <mat-chip>Rank #{{ data.market_cap_rank }}</mat-chip>
+        <mat-chip class="sentiment">👍 {{ data.sentiment_votes_up_percentage }}%</mat-chip>
+      </mat-chip-set>
+    </div>
+
+    <mat-card class="chart-card">
+      <mat-card-content>
+        <div class="chart-container">
+          <canvas
+            baseChart
+            [type]="'line'"
+            [data]="lineChartData()"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend"
+          >
+          </canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="stats-grid">
+      <mat-card>
+        <mat-card-header><mat-card-title>24h High</mat-card-title></mat-card-header>
+        <mat-card-content class="highlight-green">
+          {{ data.market_data.high_24h.usd | currency: 'USD' }}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header><mat-card-title>24h Low</mat-card-title></mat-card-header>
+        <mat-card-content class="highlight-red">
+          {{ data.market_data.low_24h.usd | currency: 'USD' }}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header><mat-card-title>Market Cap</mat-card-title></mat-card-header>
+        <mat-card-content>
+          {{ data.market_data.market_cap.usd | currency: 'USD' : 'symbol' : '1.0-0' }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <mat-card class="description-card">
+      <mat-card-header
+        ><mat-card-title>About {{ data.name }}</mat-card-title></mat-card-header
+      >
+      <mat-card-content>
+        <p [innerHTML]="data.description.en || 'No description available.'"></p>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
