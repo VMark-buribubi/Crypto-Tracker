@@ -1,59 +1,33 @@
-# CryptoTracker
+# CryptoTracker - Junior Angular Portfólió Projekt 🚀
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+Ez egy interaktív webalkalmazás, amely a CoinGecko API segítségével valós idejű és historikus kriptovaluta adatokat jelenít meg. A projekt célja, hogy bemutassa a modern Angular keretrendszer legfontosabb elemeinek gyakorlati alkalmazását, beleértve a Standalone Components architektúrát, a Signals-alapú állapotkezelést és az Angular Material komponensek használatát.
 
-## Development server
+**➡️ Élő Demo:** `https://vmark-buribubi.github.io/Crypto-Tracker/`
 
-To start a local development server, run:
+## ✨ Funkciók (Features)
 
-```bash
-ng serve
-```
+*   **Lista Nézet:** Megjeleníti a top 100 kriptovalutát piaci kapitalizáció szerint.
+*   **Részletes Nézet:** Kattintásra részletes adatlap minden coinhoz.
+*   **Interaktív Grafikon:** 7 napos historikus árfolyamadatok vizualizációja.
+*   **Keresés & Szűrés:** Dinamikus keresés név/szimbólum alapján és szűrés a 24 órás trend (pozitív/negatív) alapján.
+*   **Rendezés:** A táblázat oszlopai (ár, név, piaci kapitalizáció) szerint növekvő/csökkenő sorrendbe rendezhető.
+*   **Lapozás (Pagination):** A lista oldalakra van bontva a jobb teljesítmény és átláthatóság érdekében.
+*   **Kedvencek Rendszer:** A felhasználó csillaggal megjelölheti kedvenc coinjait, a választás a böngészőben (`localStorage`) elmentődik.
+*   **Dark Mode:** Választható világos és sötét téma, ami szintén elmentődik.
+*   **Reszponzív Design:** Az alkalmazás mobilon és asztali gépen is jól használható.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Felhasznált Technológiák
 
-## Code scaffolding
+Ez a projekt a legmodernebb Angular technikákra épül.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+*   **Keretrendszer:** **Angular** (v19+)
+    *   **Standalone Components:** Modern, `NgModule`-mentes architektúra.
+*   **Állapotkezelés (State Management):** **Angular Signals** (`signal`, `computed`, `effect`) a reaktív és hatékony állapotkezelésért.
+*   **Adatkezelés:**
+    *   **RxJS:** Az aszinkron `HttpClient` hívások kezelésére.
+    *   **REST API:** Kommunikáció a [CoinGecko API](https://www.coingecko.com/en/api)-val.
+*   **UI / Stílus:**
+    *   **Angular Material:** A kész, professzionális UI komponensekért (`MatTable`, `MatPaginator`, `MatSort`, `MatCard` stb.).
+    *   **SCSS:** A rugalmas és strukturált stíluslapokért.
+*   **Navigáció:** **Angular Router** a kliens oldali útválasztáshoz (dinamikus `:id`-val a részletek oldalhoz).
+*   **Adattárolás:** Böngésző oldali **`localStorage`** a téma és a kedvencek mentéséhez.
