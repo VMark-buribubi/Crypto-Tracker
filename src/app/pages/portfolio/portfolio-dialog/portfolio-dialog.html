@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ data.element ? 'Edit Holding' : 'Add New Asset' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="dialog-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Select Coin</mat-label>
+      <mat-select formControlName="coinId" [disabled]="!!data.element">
+        @for (coin of coinList; track coin.id) {
+          <mat-option [value]="coin.id">
+            <img [src]="coin.image" width="20" style="vertical-align: middle; margin-right: 8px" />
+            {{ coin.name }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Amount Owned</mat-label>
+      <input matInput type="number" formControlName="amount" placeholder="0.5" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Buy Price (per coin in USD)</mat-label>
+      <input matInput type="number" formControlName="cost" placeholder="50000" />
+      <span matPrefix>$&nbsp;</span>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

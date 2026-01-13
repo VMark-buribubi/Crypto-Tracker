@@ -1,0 +1,39 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  h1 {
+    margin: 0;
+  }
+
+  .balance-card {
+    background: rgba(63, 81, 181, 0.1);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #3f51b5;
+
+    span {
+      font-size: 1.2rem;
+    }
+    .balance {
+      font-weight: bold;
+      margin-left: 10px;
+      font-size: 1.5rem;
+      color: #3f51b5;
+    }
+  }
+}
+
+table {
+  width: 100%;
+}
