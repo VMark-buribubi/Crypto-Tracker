@@ -1,15 +1,21 @@
-<div class="container">
-  <div class="navigation-bar">
+<div class="container" id="pdfContent">
+  <div class="navigation-bar" data-html2image-ignore="true">
     <a mat-button routerLink="/"> <mat-icon>arrow_back</mat-icon> Back to List </a>
 
-    @if (!isLoading() && coin(); as data) {
-      <button mat-flat-button color="primary" (click)="favoritesService.toggleFavorite(data.id)">
-        <mat-icon [style.color]="favoritesService.isFavorite(data.id) ? 'gold' : 'white'">
-          {{ favoritesService.isFavorite(data.id) ? 'star' : 'star_border' }}
-        </mat-icon>
-        {{ favoritesService.isFavorite(data.id) ? 'Saved' : 'Save' }}
+    <div class="action-buttons">
+      <button mat-stroked-button (click)="exportToPdf()">
+        <mat-icon>picture_as_pdf</mat-icon> Export PDF
       </button>
-    }
+
+      @if (!isLoading() && coin(); as data) {
+        <button mat-flat-button color="primary" (click)="favoritesService.toggleFavorite(data.id)">
+          <mat-icon [style.color]="favoritesService.isFavorite(data.id) ? 'gold' : 'white'">
+            {{ favoritesService.isFavorite(data.id) ? 'star' : 'star_border' }}
+          </mat-icon>
+          {{ favoritesService.isFavorite(data.id) ? 'Saved' : 'Save' }}
+        </button>
+      }
+    </div>
   </div>
 
   @if (isLoading()) {
@@ -19,7 +25,12 @@
   }
   @if (!isLoading() && coin(); as data) {
     <div class="header-section">
-      <img [src]="data.image.large" [alt]="data.name" class="coin-logo" />
+      <img
+        [src]="'https://wsrv.nl/?url=' + data.image.large"
+        [alt]="data.name"
+        class="coin-logo"
+        crossorigin="anonymous"
+      />
       <h1>
         {{ data.name }} <span class="symbol">({{ data.symbol | uppercase }})</span>
       </h1>

@@ -12,6 +12,8 @@ import { MatChipsModule } from '@angular/material/chips';
 
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import jsPDF from 'jspdf';
+import { toPng } from 'html-to-image';
 
 @Component({
   selector: 'app-detail',
@@ -103,6 +105,38 @@ export class Detail implements OnInit {
           ],
         });
       });
+    }
+  }
+
+  exportToPdf() {
+    const data = document.getElementById('pdfContent');
+    const fileName = this.coin()?.name || 'crypto';
+
+    if (data) {
+      toPng(data, {
+        filter: (node) => {
+          if (node.tagName === 'LINK') return false;
+
+          if (node instanceof Element && node.getAttribute('data-html2image-ignore')) {
+            return false;
+          }
+
+          return true;
+        },
+      })
+        .then((dataUrl) => {
+          const pdf = new jsPDF('p', 'mm', 'a4');
+
+          const imgProps = pdf.getImageProperties(dataUrl);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+          pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save(`${fileName}-report.pdf`);
+        })
+        .catch((err) => {
+          console.error('Hiba történt a PDF generálásakor:', err);
+        });
     }
   }
 }
