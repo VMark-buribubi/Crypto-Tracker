@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "format": "prettier . --write",
-    "github-deploy": "ng deploy --base-href=https://vmark-buribubi.github.io/Crypto-Tracker/"
+    "github-deploy": "ng deploy --base-href=/Crypto-Tracker/"
   },
   "prettier": {
     "printWidth": 100,
